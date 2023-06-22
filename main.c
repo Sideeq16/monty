@@ -5,7 +5,7 @@
 /**
  * main - Monty Byte code reader
  * @argv: argument values
- * @argc - count number of argument
+ * @argc: count number of argument
  * Return: 0 or 1
  */
 int main(int argc, char **argv)
@@ -15,5 +15,5 @@ int main(int argc, char **argv)
 		fprintf(stderr, "USAGE: monty file");
 	}
 
-	return(0);
+	return (0);
 }
