@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "monty.h"
-#include <string.h>
 
 /**
  * main - Monty Byte code reader
@@ -12,9 +11,13 @@
 int main(int argc, char **argv)
 {
 	FILE *op_file;
+	track_file init_tracker = {NULL,1};
 	char *line = NULL;
 	size_t len = 0;
 	int read;
+	(void)argv;
+
+	tracker = &init_tracker;
 
 	if (argc != 2)
 	{
@@ -23,10 +26,12 @@ int main(int argc, char **argv)
 	op_file = fopen(argv[1],"r");
 	if(op_file == NULL)
 	{
-		printf("error found");	
+		log_err(401);	
 	}
 
-	while((read = getline(&line, &len, stdin)) != -1)
+	tracker->fileName = argv[1];
+
+	while(getline(&line, &len, op_file) != -1)
 	{
 		printf("Read %s", line);
 	}

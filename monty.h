@@ -31,4 +31,15 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+typedef struct track_file
+{
+	char *fileName;
+	unsigned int lineNumber;
+
+} track_file;
+
+void log_err(int err_pos);
+
+extern track_file *tracker;
+
 #endif
