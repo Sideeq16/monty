@@ -6,17 +6,17 @@
 #define MAX_LINE_LENGTH 1024
 
 
-instruction_t instructions[] = {
-	{"push", push},
-	{"pall", pall},
-	{NULL, NULL}
-};
+/* instruction_t instructions[] = { */
+/*	{"push", push}, */
+/*	{"pall", pall}, */
+/*	{NULL, NULL} */
+/* }; */
 
 
 /**
  * push - push method
  * @stack: stack
- * @line_number: line
+ * @value: value
  */
 void push(stack_t **stack, unsigned int value)
 {
@@ -63,20 +63,21 @@ void pall(stack_t **stack, unsigned int line_number)
  * @opcode: count ags
  * @stack: value of arg
  * @line_number: line nummber
+ * @instructions: what to do
+ * @argument: param
  */
 
-void execute_instruction(char *opcode, char *argument, stack_t **stack,
+void execute_instruction(instruction_t *instructions,
+char *opcode, char *argument, stack_t **stack,
 unsigned int line_number)
 {
 	int i = 0;
 
-	if (strcmp(opcode, "push") == 0)
-	{
-		int value = atoi(argument);
-		push(stack, value);
-	}
-	else
-	{
+	/* if (strcmp(opcode, "push") == 0) */
+	/* { */
+	/*	int value = atoi(argument); */
+	/*	push(stack, value); */
+	/* } */
 
 	while (instructions[i].opcode != NULL)
 	{
@@ -91,14 +92,15 @@ unsigned int line_number)
 	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 	exit(EXIT_FAILURE);
 
-	}
+
 }
 
 /**
  * process_file - process file
  * @file_path: value of arg
+ * @instructions: what to do
  */
-void process_file(const char *file_path)
+void process_file(instruction_t *instructions, const char *file_path)
 {
 	FILE *file = fopen(file_path, "r");
 	char line[MAX_LINE_LENGTH];
@@ -119,7 +121,7 @@ void process_file(const char *file_path)
 	argument = strtok(NULL, " \t\n");
 
 	if (opcode != NULL && opcode[0] != '#')
-	execute_instruction(opcode, argument, &stack, line_number);
+	execute_instruction(instructions, opcode, argument, &stack, line_number);
 
 	line_number++;
 	}
@@ -137,6 +139,11 @@ int main(int argc, char *argv[])
 {
 
 	const char *file_path;
+	instruction_t instructions[] = {
+	{"push", push},
+	{"pall", pall},
+	{NULL, NULL}
+	};
 
 	if (argc != 2)
 	{
@@ -144,6 +151,6 @@ int main(int argc, char *argv[])
 	return (EXIT_FAILURE);
 	}
 	file_path = argv[1];
-	process_file(file_path);
+	process_file(instructions, file_path);
 	return (EXIT_SUCCESS);
 }
