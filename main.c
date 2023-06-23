@@ -127,6 +127,7 @@ void process_file(instruction_t *instructions, const char *file_path)
 	}
 
 	fclose(file);
+	free_stack(stack);
 }
 
 /**

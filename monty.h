@@ -41,6 +41,7 @@ typedef struct track_file
 void log_err(int err_pos);
 void push(stack_t **stack, unsigned int value);
 void pall(stack_t **stack, unsigned int line_number);
+void free_stack( stack_t *stack);
 
 extern track_file *tracker;
 
