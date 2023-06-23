@@ -72,6 +72,7 @@ char *opcode, char *argument, stack_t **stack,
 unsigned int line_number)
 {
 	int i = 0;
+	(void)argument;
 
 	/* if (strcmp(opcode, "push") == 0) */
 	/* { */
